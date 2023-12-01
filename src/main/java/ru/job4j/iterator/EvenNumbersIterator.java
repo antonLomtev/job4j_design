@@ -11,15 +11,10 @@ public class EvenNumbersIterator implements Iterator {
         this.data = data;
     }
 
+    @SuppressWarnings("checkstyle:SimplifyBooleanExpression")
     @Override
     public boolean hasNext() {
-        while (index < data.length) {
-            if (data[index] % 2 == 0) {
-                return true;
-            }
-            index++;
-        }
-        return false;
+        return EvenNumbersIterator.this.findEven(this.index) >= 0;
     }
 
     @Override
@@ -27,6 +22,18 @@ public class EvenNumbersIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return data[index++];
+        index = EvenNumbersIterator.this.findEven(this.index);
+        return EvenNumbersIterator.this.data[this.index++];
+    }
+
+    private int findEven(int start) {
+        int rsl = -1;
+        for (int i = start; i != this.data.length; i++) {
+            if (this.data[i] % 2 == 0) {
+                rsl = i;
+                break;
+            }
+        }
+        return rsl;
     }
 }
