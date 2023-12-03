@@ -32,7 +32,7 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
             int index;
             @Override
             public boolean hasNext() {
-                if ( expectedModCount != modCount) {
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 return index < size;
