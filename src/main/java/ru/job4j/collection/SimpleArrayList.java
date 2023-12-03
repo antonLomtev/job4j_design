@@ -15,7 +15,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public void add(T value) {
         modCount++;
-        if (size == container.length - 1) {
+        if (size == container.length) {
             container = increase();
         }
         container[size++] = value;
