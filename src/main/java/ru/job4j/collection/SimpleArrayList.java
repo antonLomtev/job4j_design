@@ -1,6 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class SimpleArrayList<T> implements SimpleList<T> {
 
@@ -14,41 +14,66 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public void add(T value) {
-
+        modCount++;
+        if (size == container.length - 1) {
+            container = increase();
+        }
+        container[size++] = value;
     }
 
     @Override
     public T set(int index, T newValue) {
-        return null;
+        Objects.checkIndex(index, size);
+        T value = container[index];
+        container[index] = newValue;
+        return value;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        modCount++;
+        Objects.checkIndex(index, size);
+        T value = container[index];
+        System.arraycopy(container, index + 1, container, index, (container.length - index - 1));
+        size--;
+        return value;
     }
 
     @Override
-    public T het(int index) {
-        return null;
+    public T get(int index) {
+        Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public Iterator<T> iterator() {
+        int expectedModCount = modCount;
         return new Iterator<T>() {
+            int point;
             @Override
             public boolean hasNext() {
-                return false;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+
+                return point < size;
             }
 
             @Override
             public T next() {
-                return null;
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return container[point++];
             }
         };
+    }
+    private T[] increase() {
+        return Arrays.copyOf(container, container.length * 2 + 1);
     }
 }
