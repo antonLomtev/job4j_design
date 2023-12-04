@@ -21,6 +21,13 @@ public class ForwardLinkedList<T> implements ForwardLinked<T> {
     }
 
     @Override
+    public void addFirst(T value) {
+        head = new Node<>(value, head);
+        size++;
+        modCount++;
+    }
+
+    @Override
     public T get(int index) {
         return getNodeByIndex(index).item;
     }
