@@ -29,12 +29,16 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         return hash & (capacity - 1);
     }
 
+    private int getIndex(K key) {
+        return indexFor(hash(Objects.hashCode(key)));
+    }
+
     private void expand() {
         capacity *= 2;
         MapEntry<K, V>[] growTable = new MapEntry[capacity];
         for (MapEntry<K, V> key : table) {
             if (key != null) {
-                int index = indexFor(hash(Objects.hashCode(key.key)));
+                int index = getIndex(key.key);
                 if (growTable[index] == null) {
                     growTable[index] = new MapEntry<>(key.key, key.value);
                 }
@@ -48,7 +52,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = getIndex(key);
         boolean result = table[index] == null;
         if (result) {
             table[index] = new MapEntry<>(key, value);
@@ -60,14 +64,14 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public V get(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = getIndex(key);
         MapEntry<K, V> result = table[index];
         return check(key, index) ? result.value : null;
     }
 
     @Override
     public boolean remove(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
+        int index = getIndex(key);
         boolean checkKey = check(key, index);
         if (checkKey) {
             table[index] = null;
