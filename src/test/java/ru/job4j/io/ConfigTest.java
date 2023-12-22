@@ -23,8 +23,15 @@ class ConfigTest {
     }
 
     @Test
-    void whenIncorrectValueAndKey() {
-        String path = "./data/incorrectValueAndKey.properties";
+    void whenIncorrectKey() {
+        String path = "./data/incorrectKey.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenIncorrectValue() {
+        String path = "./data/incorrectValue.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
     }
