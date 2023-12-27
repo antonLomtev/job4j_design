@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
-        searchDuplicates(Paths.get(".")).forEach((key, value) ->  System.out.println(key.getName().equals("404.txt") ? value : " "));
+        searchDuplicates(Paths.get(".")).forEach((key, value) ->  System.out.println(key.getName() + " ---- " + value));
     }
 
     public static Map<FileProperty, List<String>> searchDuplicates(Path path) throws IOException {
