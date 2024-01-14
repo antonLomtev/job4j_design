@@ -33,13 +33,13 @@ public class ConsoleChat {
         while (!cancel) {
             String text = scanner.nextLine();
             log.add(text + " - " + LocalDateTime.now());
-            if (text.equals(OUT)) {
+            if (OUT.equals(text)) {
                 cancel = true;
             }
-            if (text.equals(STOP)) {
+            if (STOP.equals(text)) {
                 isStop = true;
             }
-            if (text.equals(CONTINUE)) {
+            if (CONTINUE.equals(text)) {
                 isStop = false;
             }
             if (!isStop) {
