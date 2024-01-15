@@ -16,7 +16,7 @@ public class CSVReader {
         List<String> filters = Arrays.asList(argsName.get("filter").split(","));
 
         try (Scanner scanner = new Scanner(path);
-             PrintStream print = new PrintStream(out)) {
+             PrintStream print = "stdout".equals(out) ? System.out : new PrintStream(out)) {
             StringJoiner joiner = new StringJoiner(System.lineSeparator());
             List<Integer> indexes = new ArrayList<>();
              boolean isFirstLine = true;
