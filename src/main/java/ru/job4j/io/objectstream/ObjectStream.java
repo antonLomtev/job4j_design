@@ -11,6 +11,7 @@ public class ObjectStream {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/serialized.dat"));
              ObjectInputStream in = new ObjectInputStream(new FileInputStream("data/serialized.dat"))) {
             out.writeObject(car);
+
             Car des = (Car) in.readObject();
             System.out.println(des.toString());
         } catch (Exception e) {
