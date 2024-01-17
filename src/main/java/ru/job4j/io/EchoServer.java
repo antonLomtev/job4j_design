@@ -12,19 +12,14 @@ public class EchoServer {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
-                boolean isStop = false;
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader input = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     if (input.readLine().contains("msg=Bye")) {
-                        isStop = true;
-                    }
-                    if (isStop) {
                         server.close();
-                    }  else {
-                        out.flush();
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     }
+                    out.flush();
                 }
             }
         }
