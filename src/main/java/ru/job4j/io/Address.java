@@ -1,8 +1,8 @@
 package ru.job4j.io;
 
 public class Address {
-    private String street;
-    private int number;
+    private final String street;
+    private final int number;
 
     public Address(String street, int number) {
         this.street = street;

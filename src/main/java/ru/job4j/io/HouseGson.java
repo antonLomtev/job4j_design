@@ -22,7 +22,7 @@ public class HouseGson {
                 + "\"number\": 50"
                 + "}}";
         final House houseMod = gson.fromJson(houseJson, House.class);
-        System.out.println(houseMod);
-        System.out.println(houseMod.getAddress());
+        System.out.println(houseMod + "");
+        System.out.println(houseMod.getAddress() + "");
     }
 }

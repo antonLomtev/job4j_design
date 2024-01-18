@@ -3,12 +3,12 @@ package ru.job4j.io;
 import java.util.Arrays;
 
 public class House {
-    private boolean isBrick;
-    private int yearOfConstruction;
-    private String company;
+    private final boolean isBrick;
+    private final int yearOfConstruction;
+    private final String company;
 
-    private Integer[] entrance;
-    private Address address;
+    private final Integer[] entrance;
+    private final Address address;
 
     public House(boolean isBrick, int yearOfConstruction, String company, Integer[] entrance, Address address) {
         this.isBrick = isBrick;
