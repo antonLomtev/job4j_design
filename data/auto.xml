@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<auto model="Lada Kalina" yearofissue="2010" run="true">
+      <colors>
+          <color>Blue</color>
+          <color>Red</color>
+          <color>Silver</color>
+      </colors>
+    <engine power ="1.6"/>
+</auto>
