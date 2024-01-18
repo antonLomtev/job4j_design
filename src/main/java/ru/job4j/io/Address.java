@@ -1,8 +1,18 @@
 package ru.job4j.io;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "address")
 public class Address {
-    private final String street;
-    private final int number;
+    @XmlAttribute
+    private String street;
+
+    @XmlAttribute
+    private int number;
+
+    public Address() {
+    }
 
     public Address(String street, int number) {
         this.street = street;
