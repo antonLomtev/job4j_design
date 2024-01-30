@@ -19,13 +19,14 @@ insert into states(state) values('Completed');
 insert into categories(category) values('Common');
 insert into categories(category) values('VIP');
 
-insert into attachs(attach) values('Invoice');
-insert into attachs(attach) values('Scan');
 
-insert into comments(comment) values('Fragile');
+insert into users(name, roles_id)
+            values('Anton', 1);
 
-insert into items(item, comments_id, attachs_id, categories_id, states_id)
-            values('Cargo', 1, 1, 2, 1);
-			
-insert into users(name, roles_id, items_id)
-            values('Anton', 1, 1);
+insert into items(item, categories_id, states_id, users_id)
+            values('Cargo', 1, 1, 1);
+
+insert into comments(comment, items_id) values('Fragile', 1);
+
+insert into attachs(attach, items_id) values('Invoice', 1);
+insert into attachs(attach, items_id) values('Scan', 1);
