@@ -69,8 +69,8 @@ or replace function create_table()
 		$$
 LANGUAGE 'plpgsql';
 
-create trigger create_before_table
-before insert
+create trigger create_after_table
+after insert
 on products
 for each row
 execute procedure create_table();
