@@ -36,9 +36,7 @@ or replace function nalog_before()
 		returns trigger as
 		$$
 			begin
-				update products
-				set price = price * 1.2
-				where id = new.id;
+				new.price = new.price * 1.2;
 				return new;
 			end;
 		$$
