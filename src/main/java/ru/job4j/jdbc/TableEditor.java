@@ -46,42 +46,38 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws SQLException {
-            try (Statement statement = connection.createStatement()) {
                 String sql = String.format(
                         "create table if not exists %s(id serial primary key);", tableName);
-                statement.execute(sql);
-            }
+                executeRequest(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s drop column %s;", tableName, columnName);
-            statement.execute(sql);
-        }
+            executeRequest(sql);
     }
 
     public void dropTable(String tableName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "drop table %s;", tableName);
-            statement.execute(sql);
-        }
+            executeRequest(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s add %s %s;", tableName, columnName, type);
-            statement.execute(sql);
-        }
+            executeRequest(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
             String sql = String.format(
                     "alter table %s rename column %s to %s;", tableName, columnName, newColumnName);
-            statement.execute(sql);
+            executeRequest(sql);
+    }
+
+    private void executeRequest(String request) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(request);
         }
     }
 
