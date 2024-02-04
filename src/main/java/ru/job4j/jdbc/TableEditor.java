@@ -27,6 +27,8 @@ public class TableEditor implements AutoCloseable {
         tableEditor.addColumn("demo_table", "name", "text");
         tableEditor.renameColumn("demo_table", "name", "first_name");
         System.out.println(getTableScheme(tableEditor.getConnection(), "demo_table"));
+        tableEditor.dropColumn("demo_table", "first_name");
+        System.out.println(getTableScheme(tableEditor.getConnection(), "demo_table"));
         tableEditor.dropTable("demo_table");
     }
 
@@ -49,6 +51,14 @@ public class TableEditor implements AutoCloseable {
                         "create table if not exists %s(id serial primary key);", tableName);
                 statement.execute(sql);
             }
+    }
+
+    public void dropColumn(String tableName, String columnName) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            String sql = String.format(
+                    "alter table %s drop column %s;", tableName, columnName);
+            statement.execute(sql);
+        }
     }
 
     public void dropTable(String tableName) throws SQLException {
