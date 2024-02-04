@@ -9,9 +9,9 @@ import java.sql.DriverManager;
 
 public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException {
-        Class.forName("org.postgresql.Driver");
         Config config = new Config("src/main/resources/app.properties");
         config.load();
+        Class.forName(config.values("driver_class"));
         try (Connection connection = DriverManager.getConnection(config.values("url"),
                 config.values("login"), config.values("password"))) {
             DatabaseMetaData metaData = connection.getMetaData();
