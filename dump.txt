@@ -1,0 +1,3 @@
+Vasya Petrov;vasya@mail.ru;
+Kirill Smirnov;smirnov@inbox.ru;
+Ivanov;qweqwe@mail.ru;
