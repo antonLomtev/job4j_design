@@ -18,7 +18,6 @@ class ShopTest {
         assertThat(store.findAll().size()).isEqualTo(1);
     }
 
-
     @Test
     void whenAddEndExpirationDateThenPrice80() {
         Food apple = new Apple("apple", LocalDate.of(2024, 3, 1), LocalDate.now().plusDays(2), 100);
