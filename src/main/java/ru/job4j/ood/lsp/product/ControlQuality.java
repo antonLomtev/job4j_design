@@ -13,4 +13,15 @@ public class ControlQuality {
         }
         return store.findAll();
     }
+
+    public void resort(List<Store> stores) {
+        List<Food> foods = new ArrayList<>();
+        for (Store store : stores) {
+            foods.addAll(store.findAll());
+            store.findAll().clear();
+        }
+        for (Store s : stores) {
+            controlProducts(s, foods);
+        }
+    }
 }
